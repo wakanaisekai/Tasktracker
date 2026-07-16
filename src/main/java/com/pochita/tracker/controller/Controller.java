@@ -19,8 +19,8 @@ public class Controller {
     }
 
     @GetMapping("/user/{userId}")
-    public Task getTaskbyId(@PathVariable Long id) {
-        return taskService.getTaskbyId(id);
+    public List<Task> getTaskbyUserId(@PathVariable Long userId) {
+        return taskService.getTaskByUserId(userId);
     }
 
     @PostMapping("/user/{userId}")
