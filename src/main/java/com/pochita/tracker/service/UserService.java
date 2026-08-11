@@ -4,17 +4,22 @@ import com.pochita.tracker.model.User;
 import com.pochita.tracker.repository.Userrepository;
 import org.springframework.stereotype.Service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.util.List;
 
 @Service
 public class UserService {
     private final Userrepository userrepository;
+    private final PasswordEncoder passwordencoder;
 
-    public UserService (Userrepository userrepository) {
+    public UserService (Userrepository userrepository, PasswordEncoder passwordencoder) {
         this.userrepository = userrepository;
+        this.passwordencoder = passwordencoder;
     }
 
     public User createUser(User user) {
+        user.setPassword(passwordencoder.encode(user.getPassword()));
         return userrepository.save(user);
     }
 
